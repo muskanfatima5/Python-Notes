@@ -1,4 +1,4 @@
-# PRIVATE AND PROTECTED VARIABLE, SUPER() FUNC, ABSTRACT CLASSES AND METHODS, INSTANCE METHODS, CLASS METHODS
+# PRIVATE AND PROTECTED VARIABLE, SUPER() FUNC, ABSTRACT CLASSES AND METHODS, INSTANCE METHODS, CLASS METHODS, DUNDER METHODS
 
 
 
@@ -188,3 +188,108 @@
 # print(s1.school)  # Green Valley High
 # Student.change_school("Blue Hill School")
 # print(s2.school)  # Blue Hill School
+
+
+
+
+
+# Dunder methods (short for **"double underscore" methods**, also known as **magic methods** or **special methods**) are a key part of Python's Object-Oriented Programming (OOP). They start and end with double underscores, like `__init__`, `__str__`, `__len__`, etc. These methods allow developers to **customize the behavior of Python's built-in operations** (such as printing, addition, iteration, etc.) for user-defined classes.
+
+# ## 🔍 **Why are they called "Dunder" methods?**
+
+# **Dunder** = **D**ouble **UNDER**score
+# Example: `__init__` is read as "dunder init".
+
+# ## 🧠 **Core Purpose of Dunder Methods in OOP:**
+
+# They allow objects to:
+
+# * Initialize themselves
+# * Behave like built-in types
+# * Be used in expressions like `+`, `-`, `==`, etc.
+# * Be iterable, callable, printable, etc.
+
+# ## 🔑 Categories of Dunder Methods
+
+# ### 1. **Object Construction & Representation**
+
+# | Dunder Method         | Purpose                              | Example                                     |
+# | --------------------- | ------------------------------------ | ------------------------------------------- |
+# | `__init__(self, ...)` | Constructor, initializes object      | Called automatically when object is created |
+# | `__new__(cls, ...)`   | Allocates memory (rarely overridden) | Runs before `__init__`                      |
+# | `__del__(self)`       | Destructor                           | Called when object is deleted               |
+# | `__str__(self)`       | String representation for users      | Used by `print(obj)`                        |
+# | `__repr__(self)`      | Official string for developers       | Used in `repr(obj)`                         |
+
+# ### 2. **Operator Overloading**
+
+# Let objects behave with operators like `+`, `-`, `*`, `==`, etc.
+
+# | Operator | Dunder Method              | Example        |
+# | -------- | -------------------------- | -------------- |
+# | `+`      | `__add__(self, other)`     | `obj1 + obj2`  |
+# | `-`      | `__sub__(self, other)`     | `obj1 - obj2`  |
+# | `*`      | `__mul__(self, other)`     | `obj1 * obj2`  |
+# | `/`      | `__truediv__(self, other)` | `obj1 / obj2`  |
+# | `==`     | `__eq__(self, other)`      | `obj1 == obj2` |
+# | `<`      | `__lt__(self, other)`      | `obj1 < obj2`  |
+
+# ### 3. **Type Conversion**
+
+# | Dunder            | Use                               |
+# | ----------------- | --------------------------------- |
+# | `__int__(self)`   | Converts object to `int`          |
+# | `__float__(self)` | Converts object to `float`        |
+# | `__bool__(self)`  | Converts object to `True`/`False` |
+
+# ### 4. **Attribute Access**
+
+# | Dunder                           | Purpose                               |
+# | -------------------------------- | ------------------------------------- |
+# | `__getattr__(self, name)`        | Called when an attribute is not found |
+# | `__getattribute__(self, name)`   | Called for **every** attribute access |
+# | `__setattr__(self, name, value)` | Custom behavior for `obj.attr = val`  |
+# | `__delattr__(self, name)`        | For `del obj.attr`                    |
+
+# ### 5. **Callable and Context Managers**
+
+# | Dunder                                      | Purpose                                  |
+# | ------------------------------------------- | ---------------------------------------- |
+# | `__call__(self, ...)`                       | Makes an object callable like a function |
+# | `__enter__(self)`                           | Used in `with` statement                 |
+# | `__exit__(self, exc_type, exc_val, exc_tb)` | Cleans up after `with` block             |
+
+# ### 6. **Container/Iterable Behavior**
+
+# | Dunder                          | Behavior                        |
+# | ------------------------------- | ------------------------------- |
+# | `__len__(self)`                 | Enables `len(obj)`              |
+# | `__getitem__(self, key)`        | Enables `obj[key]`              |
+# | `__setitem__(self, key, value)` | Enables `obj[key] = value`      |
+# | `__delitem__(self, key)`        | Enables `del obj[key]`          |
+# | `__iter__(self)`                | Returns iterator                |
+# | `__next__(self)`                | Returns next value in iteration |
+
+# ### 7. **Miscellaneous**
+
+# | Dunder                     | Purpose                                     |
+# | -------------------------- | ------------------------------------------- |
+# | `__contains__(self, item)` | Enables `item in obj`                       |
+# | `__reversed__(self)`       | Supports `reversed(obj)`                    |
+# | `__hash__(self)`           | Makes object hashable for use in sets/dicts |
+
+# ## 💡 Example: Operator Overloading Using Dunder Methods
+# class Point:
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+
+#     def __add__(self, other):
+#         return Point(self.x + other.x, self.y + other.y)
+
+#     def __str__(self):
+#         return f"({self.x}, {self.y})"
+
+# p1 = Point(1, 2)
+# p2 = Point(3, 4)
+# print(p1 + p2)  # (4, 6)
