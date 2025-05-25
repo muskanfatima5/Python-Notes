@@ -1,4 +1,4 @@
-# PROPERTY DECORATORS: @property, @setter, and @deleter, callable() and __call__(), CUSTOM EXCEPTION, CUSTOM CLASS ITERABLE
+# PROPERTY DECORATORS: @property, @setter, and @deleter, callable() and __call__(), CUSTOM EXCEPTION, ITERATION, CUSTOM CLASS ITERABLE
 
 # In Python's Object-Oriented Programming (OOP), property decorators like @property, @<property_name>.setter, and @<property_name>.deleter are used to manage attributes with getter, setter, and deleter methods — in a clean, Pythonic way.
 # They help encapsulate instance variables and provide controlled access.
@@ -129,7 +129,8 @@
 
 
 # 💥 What is a Custom Exception in OOP (Python)?
-# A custom exception is a user-defined error class that inherits from Python’s built-in Exception class (or any of its subclasses). It's used to represent specific error situations in your program that are not covered by standard exceptions like ValueError, TypeError, etc.
+# A custom exception is a user-defined error class that inherits from Python’s built-in Exception class (or any of its subclasses). 
+# It's used to represent specific error situations in your program that are not covered by standard exceptions like ValueError, TypeError, etc.
 
 # 🔧 Why Use Custom Exceptions?
 # To make error messages more meaningful
@@ -173,7 +174,77 @@
 
 
 
-# In Python's Object-Oriented Programming (OOP), a custom class iterable is a user-defined class that you make iterable — meaning you can loop over its instances using a for loop or use it with functions like list(), sum(), etc.
+
+
+
+# ## 🔁 What is *Iteration* in OOP?
+
+# In general, **iteration** refers to the process of going through a collection (like a list, tuple, dictionary, etc.) 
+# item by item — usually using a `for` loop.
+# In **Object-Oriented Programming (OOP)**, *iteration* becomes more powerful and flexible because
+#  **you can make your own objects iterable** by implementing special methods.
+
+# ## 🧠 What Makes an Object Iterable?
+# In Python, an object is **iterable** if it implements the `__iter__()` method, which returns an **iterator**. An iterator is an object that implements the `__next__()` method.
+
+#🔹 Two Key Concepts:
+# * **Iterable** = something you can loop over (`list`, `tuple`, `set`, etc.)
+# * **Iterator** = object that remembers its state as you traverse it and implements:
+
+#   * `__iter__()` → returns itself
+#   * `__next__()` → returns the next item or raises `StopIteration`
+
+#🔧 How to Create an Iterable Class (OOP Style)
+
+# Here’s a practical OOP example:
+# ✅ Example: A custom range-like class
+
+# class MyRange:
+#     def __init__(self, start, end):
+#         self.start = start
+#         self.end = end
+
+#     def __iter__(self):
+#         self.current = self.start
+#         return self
+
+#     def __next__(self):
+#         if self.current >= self.end:
+#             raise StopIteration
+#         else:
+#             current = self.current
+#             self.current += 1
+#             return current
+
+#💡 Usage:
+
+# for num in MyRange(1, 5):
+#     print(num)
+
+# **Output:**
+# 1
+# 2
+# 3
+# 4
+
+# 🧱 Why is Iteration Useful in OOP?
+
+# 1. **Encapsulation**: You can define how your objects should be looped over.
+# 2. **Custom Behavior**: You can create complex logic for what "next" means.
+# 3. **Lazy Evaluation**: With iterators/generators, you don’t need to store all data at once.
+# 4. **Integration with Pythonic Features**: Iterable classes work with loops, list comprehensions, `in`, `sum()`, `max()`, etc.
+
+# 🔁 Bonus: Iterable vs Generator
+# * Iterable: Implements `__iter__()` and returns an iterator.
+# * Generator: Special kind of iterator that uses `yield` and automatically handles state.
+
+
+
+
+
+
+# In Python's Object-Oriented Programming (OOP), a custom class iterable is a user-defined class that you make iterable
+#  — meaning you can loop over its instances using a for loop or use it with functions like list(), sum(), etc.
 
 # ✅ To make a custom class iterable, your class must implement:
 # __iter__(self) — This should return an iterator object (often self).
@@ -206,4 +277,3 @@
 # 3
 # 4
 # 5
-
